@@ -6,8 +6,10 @@ Full-stack task manager with authentication, dashboard, CRUD tasks, search/filte
 
 ```
 smart-task-app/
-├── backend/     Node.js + Express + MongoDB API (JWT auth, tasks, reminders)
-└── web/         Next.js frontend (dashboard, tasks, auth)
+├── backend/          Node.js + Express + MongoDB API (JWT auth, tasks, reminders)
+├── web/              Next.js frontend (dashboard, tasks, auth)
+└── React_Expo/
+    └── mobile/       React Native & Expo mobile application
 ```
 
 ## Backend Setup
@@ -87,19 +89,27 @@ Runs on `http://localhost:3000`.
 
 ## Mobile App (React Native / Expo)
 
-The mobile app consumes the exact same backend API. Reuse `lib/api.js`'s logic with `axios` and swap `localStorage` for `expo-secure-store` / `AsyncStorage` to persist the JWT. Screens map 1:1 to the web app: Login, Signup, Dashboard, Task List, Task Form (modal/screen).
+The mobile app is located in [React_Expo/mobile](file:///c:/Users/admin/Downloads/smart-task-app/React_Expo/mobile) and is built using React Native and Expo. It connects dynamically to the local backend during development and the Render backend in production builds.
 
-```bash
-npx create-expo-app mobile
-cd mobile
-npm install axios @react-navigation/native @react-navigation/native-stack expo-secure-store
-```
+### Setup & Running Locally
 
-Core screens to build (same features as web):
-- `LoginScreen.js`, `SignupScreen.js`
-- `DashboardScreen.js` — pending/completed/upcoming counts
-- `TaskListScreen.js` — search bar, filter chips, sort dropdown
-- `TaskFormScreen.js` — create/edit task
+1. Navigate to the mobile directory:
+   ```bash
+   cd React_Expo/mobile
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the Expo development server:
+   ```bash
+   npx expo start
+   ```
+
+### Building the APK
+To build and run an installable `.apk` file for Android devices or emulators, refer to the detailed [BUILD_INSTRUCTIONS.md](file:///c:/Users/admin/Downloads/smart-task-app/React_Expo/mobile/BUILD_INSTRUCTIONS.md):
+* Build command: `eas build --platform android --profile preview`
+* Install command: `eas build:run -p android`
 
 ## Notes
 
